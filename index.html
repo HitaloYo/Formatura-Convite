@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formatura Naylla Bastos - Enfermagem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="start-overlay">
+        <div class="start-content">
+            <h1>Naylla Bastos</h1>
+            <p>Convite de Formatura | Enfermagem</p>
+            <button id="enter-btn">Abrir Convite <i class="fa-solid fa-heart-pulse"></i></button>
+        </div>
+    </div>
+
+    <div class="music-control">
+        <button id="toggle-music"><i class="fa-solid fa-volume-high"></i></button>
+    </div>
+    <audio id="bg-music" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <div id="background-animation"></div>
+
+    <main class="container">
+
+        <section class="slide" id="missa">
+            <div class="slide-content">
+                <div class="text-box">
+                    <h2>Missa em Ação de Graças</h2>
+                    <div class="verse">
+                        <p>“Tudo posso naquele que me fortalece.”</p>
+                        <span>(Filipenses 4:13)</span>
+                    </div>
+                    <p class="body-text">
+                        Antes de qualquer conquista, existe a graça.
+                        Antes de qualquer passo, a mão de Deus conduzindo em silêncio.
+                        A missa de formatura é o meu jeito de agradecer por tudo aquilo que não aparece nos diplomas, mas sustenta cada sonho realizado.
+                        Sua presença será parte desse agradecimento.
+                    </p>
+                    <div class="info-card">
+                        <p><i class="fa-regular fa-calendar"></i> 23/02/2025 às 19h</p>
+                        <p><i class="fa-solid fa-church"></i> Paróquia de Cristo Rei</p>
+                        <p class="address">Av. Barão de Castelo Branco, 1434 – Cristo Rei</p>
+                        <a href="https://maps.google.com/?q=Paróquia de Cristo Rei Teresina" target="_blank" class="btn-map">Ver no Mapa</a>
+                    </div>
+                </div>
+                <div class="image-box">
+                    <img src="missa-bg.jpeg" alt="Naylla na Missa">
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" id="culto">
+            <div class="slide-content reverse">
+                <div class="image-box">
+                    <img src="culto-bg.jpeg" alt="Naylla no Culto">
+                </div>
+                <div class="text-box">
+                    <h2>Culto em Ação de Graças</h2>
+                    <div class="verse">
+                        <p>“O Senhor cumprirá o seu propósito para comigo.”</p>
+                        <span>(Salmos 138:8)</span>
+                    </div>
+                    <p class="body-text">
+                        Cada etapa vencida carrega muito mais do que esforço — carrega fé.
+                        Este culto é um momento de gratidão a Deus por tudo o que foi vivido, aprendido e transformado ao longo desse caminho.
+                        Será uma alegria compartilhar esse momento de gratidão e entrega com você.
+                    </p>
+                    <div class="info-card">
+                        <p><i class="fa-regular fa-calendar"></i> 24/02/2025 às 19h</p>
+                        <p><i class="fa-solid fa-hands-praying"></i> Assembleia de Deus – Campo Promorar</p>
+                        <p class="address">Q. Cento e vinte e um, 67 - Promorar</p>
+                        <a href="https://maps.google.com/?q=Assembleia de Deus Campo Promorar" target="_blank" class="btn-map">Ver no Mapa</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" id="colacao">
+            <div class="slide-content">
+                <div class="text-box">
+                    <h2>Colação de Grau</h2>
+                    <p class="body-text intro">
+                        Chegar até aqui tem um significado muito maior do que uma data ou um título.
+                        É o resultado de escolhas feitas com o coração, de aprendizados diários e de um sonho que foi sendo construído com calma, fé e persistência.
+                    </p>
+                    <p class="body-text">
+                        Esse momento marca o encerramento de uma etapa muito importante da minha história — e nada faria mais sentido do que dividir essa conquista com quem fez parte do caminho.
+                        Sua presença torna esse dia ainda mais especial.
+                    </p>
+                    <div class="info-card gold-glow">
+                        <p><i class="fa-regular fa-calendar"></i> 25/02/2025 às 20h</p>
+                        <p><i class="fa-solid fa-graduation-cap"></i> Finess Buffet</p>
+                        <p class="address">Av. Pres. Kennedy, 5880 – Morros</p>
+                        <a href="https://maps.google.com/?q=Finess Buffet Teresina" target="_blank" class="btn-map">Ver no Mapa</a>
+                    </div>
+                </div>
+                <div class="image-box">
+                    <img src="colacao-bg.jpeg" alt="Naylla Colação">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
