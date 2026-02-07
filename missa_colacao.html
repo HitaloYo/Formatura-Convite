@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naylla Bastos - Convite Especial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body> 
+
+    <div id="bg-animation"></div>
+
+    <audio id="bg-music" loop src="musica.mp3"></audio>
+    
+    <button id="music-btn" class="music-toggle"><i class="fa-solid fa-volume-off"></i></button>
+
+    <div id="music-modal" class="music-modal">
+        <div class="modal-content">
+            <h2>Bem-vindo!</h2>
+            <p>Este convite fica muito mais emocionante com música.</p>
+            <button id="modal-play" class="btn-music-play">
+                <i class="fa-solid fa-music"></i> Ativar Música
+            </button>
+            <button id="modal-close" class="btn-music-close">
+                Continuar sem som
+            </button>
+        </div>
+    </div>
+
+    <div id="bg-animation"></div>
+    <audio id="bg-music" loop src="musica.mp3"></audio>
+    <button id="music-btn" class="music-toggle"><i class="fa-solid fa-volume-off"></i></button>
+
+    <div class="scroll-container">
+        
+        <section class="event-section">
+            <div class="slide-content">
+                <div class="content-box">
+                    <h1 class="header-title">Naylla Bastos</h1>
+                    <p class="sub-title">Enfermagem | Missa</p>
+                    <p class="verse">“Tudo posso naquele que me fortalece.” (Filipenses 4:13)</p>
+                    <div class="message">
+                        <p>Antes de qualquer conquista, existe a graça. A missa de formatura é o meu jeito de agradecer.</p>
+                        <br><p>Deslize para ver o próximo evento <i class="fa-solid fa-arrow-down"></i></p>
+                    </div>
+                    <div class="details">
+                        <p><i class="fa-regular fa-calendar"></i> 23/02/2025 às 19h</p>
+                        <p><i class="fa-solid fa-location-dot"></i> Paróquia de Cristo Rei</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Paróquia+de+Cristo+Rei+Teresina" target="_blank" class="map-btn">Ver Localização</a>
+                    </div>
+                </div>
+                <div class="image-box"><img src="missa-bg.jpeg" alt="Missa"></div>
+            </div>
+            <div class="scroll-indicator no-print"><i class="fa-solid fa-chevron-down"></i></div>
+        </section>
+
+        <section class="event-section">
+            <div class="slide-content">
+                <div class="content-box">
+                    <h1 class="header-title">Naylla Bastos</h1>
+                    <p class="sub-title">Enfermagem | Colação de Grau</p>
+                    <div class="message">
+                        <p>Chegar até aqui tem um significado muito maior do que uma data ou um título.</p>
+                        <p>Esse momento marca o encerramento de uma etapa muito importante da minha história.</p>
+                    </div>
+                    <div class="details">
+                        <p><i class="fa-regular fa-calendar"></i> 25/02/2025 às 20h</p>
+                        <p><i class="fa-solid fa-location-dot"></i> Finess Buffet</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Finess+Buffet+Teresina" target="_blank" class="map-btn">Ver Localização</a>
+                    </div>
+                </div>
+                <div class="image-box"><img src="colacao-bg.jpeg" alt="Colação"></div>
+            </div>
+        </section>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

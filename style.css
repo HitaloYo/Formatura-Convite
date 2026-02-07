@@ -1,7 +1,6 @@
 :root {
     --gold: #D4AF37;
-    --gold-dark: #aa8c2c;
-    --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+    --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #AA771C);
     --black-bg: #050505;
     --card-bg: rgba(15, 15, 15, 0.95);
 }
@@ -10,46 +9,99 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: radial-gradient(circle at center, #2a2a2a 0%, #000000 100%); /* Fundo mais vivo */
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
     color: #fff;
-    overflow: hidden; /* Evita barras de rolagem desnecessárias */
-    height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- BACKGROUND ANIMATION (CAMADA FIXA) --- */
+#bg-animation {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0; /* Camada mais baixa */
+    pointer-events: none;
+}
+
+.floating-icon {
+    position: absolute;
+    color: var(--gold);
+    opacity: 0.2;
+    z-index: 0; /* Garante que o ícone fique atrás */
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    20% { opacity: 0.4; }
+    80% { opacity: 0.4; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+/* --- ESTRUTURAS DOS CARDS --- */
+/* Importante: z-index alto para ficar na frente dos ícones */
+.card-container, .slide-content {
+    background: var(--card-bg);
+    position: relative;
+    z-index: 10; /* Bem acima dos ícones */
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+/* Layout Único */
+.single-page-body {
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
-/* Container Principal - Tamanho Ajustado (80% da versão anterior) */
 .card-container {
     max-width: 950px;
     width: 90%;
-    max-height: 90vh; /* Garante que caiba na altura */
-    background: var(--card-bg);
-    border: 4px double var(--gold); /* Adorno de borda dupla */
     border-radius: 15px;
     display: flex;
-    box-shadow: 0 0 50px rgba(212, 175, 55, 0.25); /* Glow dourado atrás do cartão */
+    overflow: hidden;
+    border: 3px double var(--gold);
+}
+
+/* Layout Múltiplo (Scroll) */
+.scroll-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
     position: relative;
     z-index: 10;
 }
 
-/* Layout Texto e Imagem */
+.event-section {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.slide-content {
+    max-width: 1000px;
+    width: 100%;
+    height: 85vh;
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+}
+
+/* --- CONTEÚDO --- */
 .content-box {
     flex: 1.2;
-    padding: 2rem 2.5rem; /* Padding reduzido */
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
-}
-
-/* Adorno: Linha fina decorativa interna */
-.content-box::before {
-    content: '';
-    position: absolute;
-    top: 15px; left: 15px; right: 15px; bottom: 15px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    pointer-events: none;
+    overflow-y: auto;
 }
 
 .image-box {
@@ -63,36 +115,26 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
     transition: transform 10s ease;
 }
 
-/* Efeito suave de zoom na foto */
-.card-container:hover .image-box img {
-    transform: scale(1.05);
-}
-
-/* Tipografia */
+/* --- TEXTOS E DETALHES --- */
 h1.header-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.8rem; /* Reduzido levemente */
-    margin-bottom: 0.2rem;
-    
-    /* Efeito de Texto Dourado Realista */
+    font-size: 2.5rem;
     background: var(--gold-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 700;
-    letter-spacing: 1px;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));
+    margin-bottom: 0.5rem;
 }
 
 .sub-title {
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     color: var(--gold);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     margin-bottom: 1.5rem;
     border-bottom: 1px solid rgba(212, 175, 55, 0.3);
     padding-bottom: 10px;
@@ -103,30 +145,29 @@ h1.header-title {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     color: #e0d0a0;
-    margin-bottom: 1.2rem;
-    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
     border-left: 3px solid var(--gold);
     padding-left: 10px;
 }
 
 .message {
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: 1.6;
     color: #ccc;
     margin-bottom: 1.5rem;
     text-align: justify;
 }
 
-/* Detalhes do Evento */
 .details {
-    background: linear-gradient(to right, rgba(212, 175, 55, 0.05), transparent);
+    background: rgba(212, 175, 55, 0.08);
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
     border-left: 3px solid var(--gold);
 }
 
 .details p {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -134,105 +175,133 @@ h1.header-title {
     color: #fff;
 }
 
-.details i { 
-    color: var(--gold); 
-    width: 20px;
-    text-align: center;
-}
+.details i { color: var(--gold); width: 20px; text-align: center; }
 
-/* Botão Premium */
 .map-btn {
     display: inline-block;
-    margin-top: 12px;
+    margin-top: 10px;
     text-decoration: none;
     color: #000;
     background: var(--gold-gradient);
-    padding: 10px 25px;
-    border-radius: 30px; /* Mais arredondado */
+    padding: 10px 20px;
+    border-radius: 30px;
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-    transition: all 0.3s ease;
     border: none;
 }
 
-.map-btn:hover { 
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
-    filter: brightness(1.1);
-}
-
-/* Animação de Fundo (Mais visível) */
-#bg-animation {
+/* --- POPUP DE MÚSICA (NOVO) --- */
+.music-modal {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.floating-icon {
-    position: absolute;
-    color: var(--gold);
-    opacity: 0.3; /* Aumentei a visibilidade (antes era quase invisível) */
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.8); /* Brilho no ícone */
-    animation: floatUp linear infinite;
-}
-
-@keyframes floatUp {
-    0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
-    10% { opacity: 0.4; }
-    90% { opacity: 0.4; }
-    100% { transform: translateY(-10vh) rotate(360deg) scale(1); opacity: 0; }
-}
-
-/* Botão de Som Discreto */
-.music-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(0,0,0,0.5);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    width: 35px; height: 35px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 20;
-    transition: 0.3s;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000; /* Acima de tudo */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
 }
-.music-toggle:hover { background: var(--gold); color: black; }
 
-/* Responsividade Mobile */
+.music-modal.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: rgba(20, 20, 20, 0.95);
+    border: 2px solid var(--gold);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 90%;
+    width: 350px;
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+}
+
+.modal-content h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.modal-content p {
+    color: #ccc;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.btn-music-play {
+    background: var(--gold-gradient);
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    width: 100%;
+    display: block;
+}
+
+.btn-music-close {
+    background: transparent;
+    color: #777;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-decoration: underline;
+}
+
+/* Botão Flutuante (após fechar modal) */
+.music-toggle {
+    position: fixed; bottom: 20px; right: 20px;
+    background: rgba(0,0,0,0.6); border: 1px solid var(--gold);
+    color: var(--gold); width: 40px; height: 40px;
+    border-radius: 50%; cursor: pointer; z-index: 99;
+}
+
+/* --- MOBILE --- */
 @media (max-width: 768px) {
-    body {
-        align-items: flex-start; /* Permite scroll no mobile se precisar */
-        overflow-y: auto;
+    .single-page-body { height: auto; padding: 20px 0; }
+    
+    .card-container, .slide-content {
+        flex-direction: column-reverse; /* Foto em cima */
+        height: auto;
+        min-height: auto;
+    }
+
+    .event-section {
+        height: auto;
+        min-height: 100vh;
         padding: 10px;
     }
 
-    .card-container { 
-        flex-direction: column-reverse; 
-        max-height: none; /* Remove limite de altura no mobile */
-        width: 100%;
-        margin: 20px 0;
-    }
-    
-    .image-box { 
-        height: 250px; 
-        flex: none; 
+    .image-box {
+        flex: none;
+        height: 380px; /* Aumentei a altura para caber melhor */
         border-left: none;
         border-bottom: 2px solid var(--gold);
     }
     
+    .image-box img {
+        /* A MÁGICA: Fixa a imagem no topo (cabeça), cortando apenas as pernas se necessário */
+        object-position: top center; 
+    }
+
     .content-box { padding: 1.5rem; }
-    .content-box::before { display: none; } /* Remove borda interna no mobile */
-    
-    h1.header-title { font-size: 2rem; }
-    
-    .message { font-size: 0.85rem; text-align: left; }
+    h1.header-title { font-size: 1.8rem; }
+    .scroll-indicator { 
+        position: relative; 
+        margin-top: 20px; 
+        text-align: center;
+        display: block;
+        animation: bounce 2s infinite;
+    }
 }
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform:translateY(0);} 40% {transform:translateY(-10px);} 60% {transform:translateY(-5px);} }
