@@ -1,37 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Variáveis ---
+    // --- Variáveis do Player de Música ---
     const audio = document.getElementById('bg-music');
-    const musicBtn = document.getElementById('music-btn'); // Botão flutuante
-    const modal = document.getElementById('music-modal'); // O Pop-up
-    const btnPlay = document.getElementById('modal-play'); // Botão do Pop-up "Ativar"
-    const btnClose = document.getElementById('modal-close'); // Botão do Pop-up "X"
+    const musicBtn = document.getElementById('music-btn');
+    const modal = document.getElementById('music-modal');
+    const btnPlay = document.getElementById('modal-play');
+    const btnClose = document.getElementById('modal-close');
     
     let isPlaying = false;
     audio.volume = 0.5;
 
-    // 1. Mostrar o Modal assim que carregar (com pequeno delay para animação)
+    // Mostrar o Modal
     setTimeout(() => {
         modal.classList.add('show');
     }, 500);
 
-    // 2. Ação: Clicou em "Ativar Música"
+    // Ação: Ativar Música
     btnPlay.addEventListener('click', () => {
         audio.play().then(() => {
             isPlaying = true;
             musicBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
-            modal.classList.remove('show'); // Esconde o modal
-        }).catch(err => {
-            console.log("Autoplay bloqueado pelo navegador", err);
-        });
+            modal.classList.remove('show');
+        }).catch(err => { console.log("Erro autoplay", err); });
     });
 
-    // 3. Ação: Clicou em "Não quero música" (Fechar)
+    // Ação: Fechar sem música
     btnClose.addEventListener('click', () => {
         modal.classList.remove('show');
-        // A música continua pausada
     });
 
-    // 4. Botão Flutuante (Canto da tela)
+    // Botão Flutuante
     musicBtn.addEventListener('click', () => {
         if (isPlaying) {
             audio.pause();
@@ -43,30 +40,46 @@ document.addEventListener('DOMContentLoaded', () => {
         isPlaying = !isPlaying;
     });
 
-    // --- Animação de Fundo (Ícones) ---
+    // --- GERAR PADRÃO DE FUNDO ESTÁTICO ---
     const bg = document.getElementById('bg-animation');
-    const icons = ['fa-heart', 'fa-user-nurse', 'fa-syringe', 'fa-stethoscope', 'fa-graduation-cap', 'fa-star'];
+    // Ícones focados em enfermagem
+    const icons = [
+        'fa-heart-pulse',
+        'fa-user-nurse',
+        'fa-syringe',
+        'fa-stethoscope',
+        'fa-notes-medical',
+        'fa-pills',
+        'fa-kit-medical'
+    ];
 
-    function createIcon() {
-        const i = document.createElement('i');
-        const iconClass = icons[Math.floor(Math.random() * icons.length)];
-        i.classList.add('fa-solid', iconClass, 'floating-icon');
-        
-        // Posição e Tamanho
-        i.style.left = Math.random() * 100 + 'vw';
-        const size = Math.random() * 20 + 10;
-        i.style.fontSize = size + 'px';
-        
-        // Z-Index baixo garantido via JS também
-        i.style.zIndex = "0";
+    function generateStaticPattern() {
+        // Cria 60 ícones para preencher bem a tela
+        for (let i = 0; i < 60; i++) {
+            const iconEl = document.createElement('i');
+            const iconClass = icons[Math.floor(Math.random() * icons.length)];
+            iconEl.classList.add('fa-solid', iconClass, 'floating-icon');
+            
+            // Posição aleatória na tela
+            iconEl.style.left = Math.random() * 100 + 'vw';
+            iconEl.style.top = Math.random() * 100 + 'vh';
+            
+            // Tamanho variado
+            const size = Math.random() * 25 + 15; // entre 15px e 40px
+            iconEl.style.fontSize = size + 'px';
+            
+            // Rotação aleatória para parecer um padrão natural
+            const rotation = Math.random() * 360;
+            iconEl.style.transform = `rotate(${rotation}deg)`;
 
-        // Duração aleatória
-        const duration = Math.random() * 15 + 10;
-        i.style.animationDuration = duration + 's';
-        
-        bg.appendChild(i);
-        setTimeout(() => i.remove(), duration * 1000);
+            // Z-Index garantido baixo
+            iconEl.style.zIndex = "0";
+            
+            bg.appendChild(iconEl);
+            // Não removemos eles, pois são estáticos agora
+        }
     }
 
-    setInterval(createIcon, 800);
+    // Gera o padrão uma vez ao carregar
+    generateStaticPattern();
 });
